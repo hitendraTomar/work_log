@@ -1,0 +1,26 @@
+<h3>New WorkLog</h3>
+<%= form_for(work_log) do |f| %>
+  <% if work_log.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(work_log.errors.count, "error") %> prohibited this from being saved:</h2>
+
+      <ul>
+        <% work_log.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <h5>Name: <%=work_log&.user&.name%></h5>
+  </div>
+  <div class="field">
+    <h5>WorkLog:</h5>
+    <%= f.text_area :worklog, class: 'form-control' %>
+  </div>
+  <br>
+  <div class="actions">
+    <%= f.submit class: 'btn btn-primary' %>
+  </div>
+<% end %>
+    

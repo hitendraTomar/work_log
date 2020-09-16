@@ -1,0 +1,30 @@
+<%= form_tag(work_logs_path, :method => "get", remote: true) do %>  
+  <div class="form-row">
+    <div class='datepicker'>      
+      <label>From</label>
+      <%= date_field(:search, :from_date, class: 'form-control') %>
+    </div>
+  
+    <div class='datepicker'>      
+      <label>To</label>
+      <%= date_field(:search, :to_date, class: 'form-control', placeholder: 'FromDate') %>
+    </div>
+  
+    <div> 
+      <label>User</label>
+      <%= select_tag('search[user_id]', options_for_select(User.pluck(:name, :id)), prompt: 'All Users', class: 'form-control') %>
+    </div>
+    <div>
+      <label>WorkLog</label>
+      <%= text_field(:search, :worklog, class: 'form-control', placeholder: 'Worklog') %>
+    </div>
+    <div>
+      <label>&nbsp;</label>
+      <%= submit_tag "Apply Filter", class: "btn btn-primary form-control"%>
+    </div>
+  </div>
+  
+<% end %>
+<div id='worklogs'>
+  <%= render 'work_log', work_logs: @work_logs%>
+</div>

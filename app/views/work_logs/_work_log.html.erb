@@ -1,0 +1,24 @@
+<h3>Worklog History</h3>
+<table class="table table-striped">
+  <tr>
+    <th>Name</th>
+    <th>Worklog</th>
+    <th>Date</th>
+    <th> Actions </th>
+  </tr>
+  <% work_logs.each do |work_log|%>
+    <tr>
+      <td><%= work_log&.user&.name%></td>
+      <td><%= work_log.worklog%></td>
+      <td><%= work_log.created_at&.strftime("%d/%m/%y")%></td>
+      <td>
+        <% if work_log.can_perform_action?(current_user.id) %>
+          <%= link_to("Edit", edit_work_log_path(work_log), class: 'm-r-sm') %>
+          <%= link_to("Delete", work_log, method: :delete, data: { confirm: 'Are you sure?' }) %>
+        <%end%>
+      </td>
+    </tr>
+  <%end%>
+</table>
+<br>
+<%= link_to "Download above records in csv", export_csv_work_logs_path(request.parameters.merge(format: "csv")) %>
